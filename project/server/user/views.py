@@ -17,7 +17,7 @@ from project.server.user.forms import LoginForm, RegisterForm
 #### config ####
 ################
 
-user_blueprint = Blueprint('user', __name__,)
+user_blueprint = Blueprint('user_client', __name__,)
 
 
 ################

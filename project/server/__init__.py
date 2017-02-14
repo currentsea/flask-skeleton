@@ -13,7 +13,9 @@ from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from project.server.admin.views import UserView
 
 ################
 #### config ####
@@ -24,6 +26,11 @@ app = Flask(
     template_folder='../client/templates',
     static_folder='../client/static'
 )
+
+
+
+
+admin = Admin(app)
 
 
 app_settings = os.getenv('APP_SETTINGS', 'project.server.config.DevelopmentConfig')
@@ -40,6 +47,9 @@ bcrypt = Bcrypt(app)
 toolbar = DebugToolbarExtension(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+from project.server.models import User
+
+admin.add_view(UserView(User, db.session))
 
 
 ###################
